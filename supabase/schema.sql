@@ -7,15 +7,38 @@ create table if not exists public.profiles (
 );
 
 alter table public.profiles enable row level security;
-create policy "users can read own profile" on public.profiles for select using (auth.uid()=id);
-create policy "users can update own profile" on public.profiles for update using (auth.uid()=id);
+
+drop policy if exists "users can read own profile" on public.profiles;
+drop policy if exists "users can update own profile" on public.profiles;
+
+create policy "users can read own profile"
+on public.profiles for select
+using (auth.uid() = id);
+
+-- This policy intentionally permits updates only to the user's own row.
+-- Admin role/points must be changed server-side; do not expose the service-role key.
+create policy "users can update own profile"
+on public.profiles for update
+using (auth.uid() = id)
+with check (auth.uid() = id);
 
 create or replace function public.handle_new_user()
-returns trigger language plpgsql security definer set search_path = public as $$
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
 begin
-  insert into public.profiles (id,phone) values (new.id,new.phone) on conflict (id) do nothing;
+  insert into public.profiles (id, phone)
+  values (new.id, new.phone)
+  on conflict (id) do nothing;
   return new;
-end; $$;
+end;
+$$;
 
 drop trigger if exists on_auth_user_created on auth.users;
-create trigger on_auth_user_created after insert on auth.users for each row execute procedure public.handle_new_user();
+create trigger on_auth_user_created
+after insert on auth.users
+for each row execute procedure public.handle_new_user();
+
+-- Admins are assigned manually/server-side.
