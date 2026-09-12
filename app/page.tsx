@@ -7,8 +7,6 @@ const supabase = createClient()
 
 export default function Home() {
   const [phone,setPhone]=useState('')
-  const [otp,setOtp]=useState('')
-  const [sent,setSent]=useState(false)
   const [user,setUser]=useState<any>(null)
   const [message,setMessage]=useState('')
   const [loading,setLoading]=useState(false)
@@ -19,41 +17,32 @@ export default function Home() {
     return ()=>subscription.unsubscribe()
   },[])
 
-  async function sendOtp(){
-    setMessage(''); if(!/^09\d{9}$/.test(phone)){setMessage('شماره موبایل ۱۱ رقمی معتبر وارد کنید.');return}
+  // موقتاً احراز پیامکی غیرفعال است. برای نسخه نهایی باید OTP واقعی فعال شود.
+  async function continueWithPhone(){
+    setMessage('')
+    if(!/^09\d{9}$/.test(phone)){setMessage('شماره موبایل ۱۱ رقمی معتبر وارد کنید.');return}
     setLoading(true)
-    const normalized='+98'+phone.slice(1)
-    const {error}=await supabase.auth.signInWithOtp({phone:normalized})
-    setLoading(false); if(error){setMessage(error.message);return}
-    setSent(true);setMessage('کد تأیید پیامکی ارسال شد.')
+    // فعلاً فقط رابط ورود را آماده می‌کنیم؛ احراز واقعی بعداً متصل می‌شود.
+    setTimeout(()=>{
+      setLoading(false)
+      setMessage('ورود با کد پیامکی فعلاً غیرفعال است. این مرحله موقتاً بدون احراز کد انجام می‌شود.')
+    },300)
   }
 
-  async function verifyOtp(){
-    setLoading(true);setMessage('')
-    const {error}=await supabase.auth.verifyOtp({phone:'+98'+phone.slice(1),token:otp,type:'sms'})
-    setLoading(false); if(error){setMessage(error.message);return}
-    setMessage('ورود با موفقیت انجام شد.')
-  }
-
-  async function logout(){await supabase.auth.signOut();setUser(null);setSent(false);setOtp('')}
+  async function logout(){await supabase.auth.signOut();setUser(null)}
 
   return <main className="card">
     <div className="logo">B.K</div><h1 className="title">هلدینگ</h1><div className="sub">Mine · باشگاه مشتریان</div>
     {!user ? <>
-      <p className="text">ورود و عضویت فقط با شماره موبایل و کد تأیید پیامکی.</p>
-      <input className="input" inputMode="tel" maxLength={11} value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g,''))} placeholder="مثلاً 09123456789" disabled={sent}/>
-      {!sent ? <button className="gold" onClick={sendOtp} disabled={loading}>{loading?'در حال ارسال...':'ارسال کد تأیید'}</button> : <>
-        <input className="input" inputMode="numeric" maxLength={6} value={otp} onChange={e=>setOtp(e.target.value.replace(/\D/g,''))} placeholder="کد پیامکی"/>
-        <button className="gold" onClick={verifyOtp} disabled={loading}>{loading?'در حال بررسی...':'تأیید و ورود'}</button>
-        <button className="outline" onClick={()=>{setSent(false);setOtp('')}}>تغییر شماره</button>
-      </>}
+      <p className="text">فعلاً ورود با شماره موبایل بدون کد تأیید پیامکی.</p>
+      <input className="input" inputMode="tel" maxLength={11} value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g,''))} placeholder="مثلاً 09123456789"/>
+      <button className="gold" onClick={continueWithPhone} disabled={loading}>{loading?'در حال بررسی...':'ادامه'}</button>
       {message&&<div className="note">{message}</div>}
     </> : <>
       <h2 className="section-title">خوش آمدید 🌟</h2>
       <div className="box"><b>حساب کاربری</b><p className="small">شماره تأییدشده: {user.phone}</p></div>
       <div className="stats"><div className="stat">امتیاز<strong>0</strong></div><div className="stat">سطح<strong>عضو</strong></div></div>
       <button className="gold" onClick={logout}>خروج از حساب</button>
-      <div className="note">حساب شما با احراز هویت واقعی Supabase مدیریت می‌شود. بخش‌های دیتابیس و مدیریت در مرحله بعد به همین حساب متصل می‌شوند.</div>
     </>}
   </main>
 }
