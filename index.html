@@ -5,7 +5,7 @@
 <title>B.K Mine</title>
 <meta name="description" content="B.K Mine — هلدینگ و باشگاه مشتریان">
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:#030303;color:#eee}body{display:flex;justify-content:center;padding:24px 14px}.card{width:min(610px,100%);border:1px solid #4a3820;border-radius:38px;background:#0d0d0d;padding:52px 30px;text-align:center;box-shadow:0 20px 70px #000}.logo{width:185px;height:185px;border:2px solid #d9a94f;border-radius:50%;display:grid;place-items:center;margin:0 auto 38px;color:#dfb15d;font:700 60px Georgia,serif}.title{font-size:44px;color:#dfb15d;margin:0 0 12px}.sub{font-size:20px;color:#888;margin-bottom:38px}.text{font-size:20px;line-height:2;color:#bbb;margin:0 0 28px}.gold,.outline{display:block;width:100%;border-radius:24px;font-size:21px;font-weight:700;padding:22px 16px;text-decoration:none;cursor:pointer}.gold{border:0;background:#dfb15d;color:#111}.outline{margin-top:14px;border:1px solid #6b4e27;background:#0d0d0d;color:#dfb15d}.note{margin-top:28px;padding:25px;border:1px solid #3b2d1d;border-radius:28px;color:#777;line-height:2;font-size:14px}.hidden{display:none}.section-title{color:#dfb15d;font-size:30px;margin:0 0 25px}.input{width:100%;padding:18px;margin:8px 0;background:#090909;border:1px solid #4a3820;border-radius:18px;color:#fff;font-size:17px;text-align:right}.box{border:1px solid #3b2d1d;border-radius:25px;padding:22px;margin:12px 0;text-align:right;background:#101010}.box b{color:#dfb15d}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.back{color:#dfb15d;cursor:pointer}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{padding:20px;border:1px solid #3b2d1d;border-radius:22px;background:#101010}.stat strong{display:block;color:#dfb15d;font-size:28px;margin-top:8px}.small{font-size:13px;color:#777;line-height:1.9}@media(max-width:500px){.card{padding:42px 22px}.logo{width:165px;height:165px;font-size:54px}.title{font-size:38px}.text{font-size:18px}.gold,.outline{font-size:19px}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:#030303;color:#eee}body{display:flex;justify-content:center;padding:24px 14px}.card{width:min(610px,100%);border:1px solid #4a3820;border-radius:38px;background:#0d0d0d;padding:52px 30px;text-align:center;box-shadow:0 20px 70px #000}.logo{width:185px;height:185px;border:2px solid #d9a94f;border-radius:50%;display:grid;place-items:center;margin:0 auto 38px;color:#dfb15d;font:700 60px Georgia,serif}.title{font-size:44px;color:#dfb15d;margin:0 0 12px}.sub{font-size:20px;color:#888;margin-bottom:38px}.text{font-size:20px;line-height:2;color:#bbb;margin:0 0 28px}.gold,.outline{display:block;width:100%;border-radius:24px;font-size:21px;font-weight:700;padding:22px 16px;text-decoration:none;cursor:pointer}.gold{border:0;background:#dfb15d;color:#111}.outline{margin-top:14px;border:1px solid #6b4e27;background:#0d0d0d;color:#dfb15d}.note{margin-top:28px;padding:25px;border:1px solid #3b2d1d;border-radius:28px;color:#777;line-height:2;font-size:14px}.hidden{display:none}.section-title{color:#dfb15d;font-size:30px;margin:0 0 25px}.input{width:100%;padding:18px;margin:8px 0;background:#090909;border:1px solid #4a3820;border-radius:18px;color:#fff;font-size:17px;text-align:right}.box{border:1px solid #3b2d1d;border-radius:25px;padding:22px;margin:12px 0;text-align:right;background:#101010}.box b{color:#dfb15d}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.back{color:#dfb15d;cursor:pointer}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{padding:20px;border:1px solid #3b2d1d;border-radius:22px;background:#101010}.stat strong{display:block;color:#dfb15d;font-size:28px;margin-top:8px}.small{font-size:13px;color:#777;line-height:1.9}.member-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.delete{border:1px solid #6b3027;background:#160909;color:#e79a8d;border-radius:12px;padding:9px 12px;cursor:pointer}@media(max-width:500px){.card{padding:42px 22px}.logo{width:165px;height:165px;font-size:54px}.title{font-size:38px}.text{font-size:18px}.gold,.outline{font-size:19px}}
 </style>
 </head>
 <body>
@@ -20,8 +20,8 @@
 <section id="club" class="hidden">
 <div class="top"><span class="back" onclick="show('home')">بازگشت</span><span class="small">B.K Mine</span></div>
 <h2 class="section-title">باشگاه مشتریان</h2>
-<p class="text">شماره موبایل خود را وارد کنید تا عضویت شما در این دستگاه ثبت شود.</p>
-<input id="phone" class="input" inputmode="tel" placeholder="مثلاً 09123456789">
+<p class="text">شماره موبایل خود را وارد کنید تا عضویت شما ثبت شود.</p>
+<input id="phone" class="input" inputmode="tel" maxlength="11" placeholder="مثلاً 09123456789">
 <button class="gold" onclick="joinClub()">ثبت عضویت</button>
 <div id="clubMsg" class="note"></div>
 </section>
@@ -35,27 +35,33 @@
 <section id="adminLogin" class="hidden">
 <div class="top"><span class="back" onclick="show('home')">بازگشت</span><span class="small">مدیریت</span></div>
 <h2 class="section-title">ورود مدیر</h2>
-<input id="adminPass" class="input" type="password" placeholder="رمز مدیریت">
+<input id="adminPass" class="input" type="password" placeholder="رمز مدیریت" onkeydown="if(event.key==='Enter')adminLogin()">
 <button class="gold" onclick="adminLogin()">ورود به پنل</button>
-<div id="adminMsg" class="note">پنل فعلاً برای نسخه آزمایشی فعال است. رمز پیش‌فرض: <b>BK2026</b></div>
+<div id="adminMsg" class="note">ورود آزمایشی فعال است.</div>
 </section>
 <section id="admin" class="hidden">
-<div class="top"><span class="back" onclick="show('home')">خروج</span><span class="small">B.K Mine Admin</span></div>
+<div class="top"><span class="back" onclick="adminLogout()">خروج</span><span class="small">B.K Mine Admin</span></div>
 <h2 class="section-title">پنل مدیریت</h2>
 <div class="stats"><div class="stat">اعضای باشگاه<strong id="memberCount">0</strong></div><div class="stat">وضعیت<strong>فعال</strong></div></div>
-<div class="box"><b>مدیریت باشگاه مشتریان</b><p class="small">لیست اعضای ثبت‌شده روی همین مرورگر در نسخه آزمایشی نگهداری می‌شود.</p></div>
+<div class="box"><b>مدیریت اعضا</b><p class="small">ثبت عضو، جست‌وجو و حذف اعضای آزمایشی از این بخش انجام می‌شود.</p></div>
+<input id="memberSearch" class="input" placeholder="جست‌وجوی شماره موبایل" oninput="refreshAdmin()">
 <div id="membersList"></div>
-<button class="outline" onclick="clearMembers()">پاک کردن اعضای آزمایشی</button>
+<button class="outline" onclick="clearMembers()">پاک کردن همه اعضای آزمایشی</button>
+<div class="note">⚠️ این نسخه هنوز دیتابیس و احراز هویت واقعی ندارد؛ اطلاعات در حافظه مرورگر ذخیره می‌شود.</div>
 </section>
 </main>
 <script>
 const ids=['home','club','member','adminLogin','admin'];
+const ADMIN_PASSWORD='BK2026';
 function show(id){ids.forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));if(id==='admin')refreshAdmin()}
 function getMembers(){try{return JSON.parse(localStorage.getItem('bk_members')||'[]')}catch(e){return[]}}
-function joinClub(){const p=document.getElementById('phone').value.trim();if(!/^09\d{9}$/.test(p)){document.getElementById('clubMsg').textContent='لطفاً یک شماره موبایل ۱۱ رقمی معتبر وارد کنید.';return}let m=getMembers();if(!m.includes(p))m.push(p);localStorage.setItem('bk_members',JSON.stringify(m));document.getElementById('memberPhone').textContent=p;show('member')}
-function adminLogin(){if(document.getElementById('adminPass').value==='BK2026'){document.getElementById('adminPass').value='';show('admin')}else document.getElementById('adminMsg').textContent='رمز مدیریت اشتباه است.'}
-function refreshAdmin(){const m=getMembers();document.getElementById('memberCount').textContent=m.length;document.getElementById('membersList').innerHTML=m.length?m.map((x,i)=>`<div class="box"><b>عضو ${i+1}</b><div class="small">${x}</div></div>`).join(''):'<div class="note">هنوز عضوی ثبت نشده است.</div>'}
-function clearMembers(){if(confirm('اعضای آزمایشی حذف شوند؟')){localStorage.removeItem('bk_members');refreshAdmin()}}
+function saveMembers(m){localStorage.setItem('bk_members',JSON.stringify(m))}
+function joinClub(){const p=document.getElementById('phone').value.trim();const msg=document.getElementById('clubMsg');if(!/^09\d{9}$/.test(p)){msg.textContent='لطفاً یک شماره موبایل ۱۱ رقمی معتبر وارد کنید.';return}let m=getMembers();const exists=m.includes(p);if(!exists){m.push(p);saveMembers(m)}document.getElementById('memberPhone').textContent=p;show('member')}
+function adminLogin(){if(document.getElementById('adminPass').value===ADMIN_PASSWORD){document.getElementById('adminPass').value='';show('admin')}else document.getElementById('adminMsg').textContent='رمز مدیریت اشتباه است.'}
+function adminLogout(){show('home')}
+function refreshAdmin(){const all=getMembers();const q=(document.getElementById('memberSearch')?.value||'').trim();const m=q?all.filter(x=>x.includes(q)):all;document.getElementById('memberCount').textContent=all.length;document.getElementById('membersList').innerHTML=m.length?m.map((x,i)=>`<div class="box member-row"><div><b>عضو ${all.indexOf(x)+1}</b><div class="small">${x}</div></div><button class="delete" onclick="deleteMember('${x}')">حذف</button></div>`).join(''):'<div class="note">عضوی پیدا نشد.</div>'}
+function deleteMember(phone){if(confirm('این عضو حذف شود؟')){saveMembers(getMembers().filter(x=>x!==phone));refreshAdmin()}}
+function clearMembers(){if(confirm('همه اعضای آزمایشی حذف شوند؟')){localStorage.removeItem('bk_members');refreshAdmin()}}
 show('home');
 </script>
 </body>
