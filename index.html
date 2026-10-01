@@ -1,68 +1,334 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>B.K Mine</title>
-<meta name="description" content="B.K Mine — هلدینگ و باشگاه مشتریان">
-<style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:#030303;color:#eee}body{display:flex;justify-content:center;padding:24px 14px}.card{width:min(610px,100%);border:1px solid #4a3820;border-radius:38px;background:#0d0d0d;padding:52px 30px;text-align:center;box-shadow:0 20px 70px #000}.logo{width:185px;height:185px;border:2px solid #d9a94f;border-radius:50%;display:grid;place-items:center;margin:0 auto 38px;color:#dfb15d;font:700 60px Georgia,serif}.title{font-size:44px;color:#dfb15d;margin:0 0 12px}.sub{font-size:20px;color:#888;margin-bottom:38px}.text{font-size:20px;line-height:2;color:#bbb;margin:0 0 28px}.gold,.outline{display:block;width:100%;border-radius:24px;font-size:21px;font-weight:700;padding:22px 16px;text-decoration:none;cursor:pointer}.gold{border:0;background:#dfb15d;color:#111}.outline{margin-top:14px;border:1px solid #6b4e27;background:#0d0d0d;color:#dfb15d}.note{margin-top:28px;padding:25px;border:1px solid #3b2d1d;border-radius:28px;color:#777;line-height:2;font-size:14px}.hidden{display:none}.section-title{color:#dfb15d;font-size:30px;margin:0 0 25px}.input{width:100%;padding:18px;margin:8px 0;background:#090909;border:1px solid #4a3820;border-radius:18px;color:#fff;font-size:17px;text-align:right}.box{border:1px solid #3b2d1d;border-radius:25px;padding:22px;margin:12px 0;text-align:right;background:#101010}.box b{color:#dfb15d}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.back{color:#dfb15d;cursor:pointer}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{padding:20px;border:1px solid #3b2d1d;border-radius:22px;background:#101010}.stat strong{display:block;color:#dfb15d;font-size:28px;margin-top:8px}.small{font-size:13px;color:#777;line-height:1.9}.member-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.delete{border:1px solid #6b3027;background:#160909;color:#e79a8d;border-radius:12px;padding:9px 12px;cursor:pointer}@media(max-width:500px){.card{padding:42px 22px}.logo{width:165px;height:165px;font-size:54px}.title{font-size:38px}.text{font-size:18px}.gold,.outline{font-size:19px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هلدینگ B.K | مرجع تخصصی فروش قانونی تجهیزات ماینینگ و استخراج</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Google Fonts: Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        gold: { 400: '#facc15', 500: '#eab308', 600: '#ca8a04' },
+                        dark: { 800: '#0f172a', 900: '#020617', 950: '#01040d' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #020617; color: #f8fafc; }
+        .glass { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .gold-gradient { background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%); }
+        .gold-text { background: linear-gradient(135deg, #fef08a 0%, #eab308 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
 </head>
-<body>
-<main class="card">
-<section id="home">
-<div class="logo">B.K</div><h1 class="title">هلدینگ</h1><div class="sub">Mine · باشگاه مشتریان</div>
-<p class="text">برای عضویت در باشگاه مشتریان، شماره موبایل خود را وارد کنید.</p>
-<button class="gold" onclick="show('club')">عضویت در باشگاه مشتریان</button>
-<button class="outline" onclick="show('adminLogin')">ورود مدیر</button>
-<div class="note">B.K Mine<br>نسخه اولیه باشگاه مشتریان و مدیریت</div>
-</section>
-<section id="club" class="hidden">
-<div class="top"><span class="back" onclick="show('home')">بازگشت</span><span class="small">B.K Mine</span></div>
-<h2 class="section-title">باشگاه مشتریان</h2>
-<p class="text">شماره موبایل خود را وارد کنید تا عضویت شما ثبت شود.</p>
-<input id="phone" class="input" inputmode="tel" maxlength="11" placeholder="مثلاً 09123456789">
-<button class="gold" onclick="joinClub()">ثبت عضویت</button>
-<div id="clubMsg" class="note"></div>
-</section>
-<section id="member" class="hidden">
-<div class="top"><span class="back" onclick="show('home')">خروج</span><span class="small">باشگاه مشتریان</span></div>
-<h2 class="section-title">خوش آمدید 🌟</h2>
-<div class="box">عضویت شما با موفقیت ثبت شد.</div>
-<div class="stats"><div class="stat">امتیاز<strong>0</strong></div><div class="stat">سطح<strong>عضو</strong></div></div>
-<div class="box"><b>شماره ثبت‌شده</b><div id="memberPhone" class="small"></div></div>
-</section>
-<section id="adminLogin" class="hidden">
-<div class="top"><span class="back" onclick="show('home')">بازگشت</span><span class="small">مدیریت</span></div>
-<h2 class="section-title">ورود مدیر</h2>
-<input id="adminPass" class="input" type="password" placeholder="رمز مدیریت" onkeydown="if(event.key==='Enter')adminLogin()">
-<button class="gold" onclick="adminLogin()">ورود به پنل</button>
-<div id="adminMsg" class="note">ورود آزمایشی فعال است.</div>
-</section>
-<section id="admin" class="hidden">
-<div class="top"><span class="back" onclick="adminLogout()">خروج</span><span class="small">B.K Mine Admin</span></div>
-<h2 class="section-title">پنل مدیریت</h2>
-<div class="stats"><div class="stat">اعضای باشگاه<strong id="memberCount">0</strong></div><div class="stat">وضعیت<strong>فعال</strong></div></div>
-<div class="box"><b>مدیریت اعضا</b><p class="small">ثبت عضو، جست‌وجو و حذف اعضای آزمایشی از این بخش انجام می‌شود.</p></div>
-<input id="memberSearch" class="input" placeholder="جست‌وجوی شماره موبایل" oninput="refreshAdmin()">
-<div id="membersList"></div>
-<button class="outline" onclick="clearMembers()">پاک کردن همه اعضای آزمایشی</button>
-<div class="note">⚠️ این نسخه هنوز دیتابیس و احراز هویت واقعی ندارد؛ اطلاعات در حافظه مرورگر ذخیره می‌شود.</div>
-</section>
-</main>
-<script>
-const ids=['home','club','member','adminLogin','admin'];
-const ADMIN_PASSWORD='BK2026';
-function show(id){ids.forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));if(id==='admin')refreshAdmin()}
-function getMembers(){try{return JSON.parse(localStorage.getItem('bk_members')||'[]')}catch(e){return[]}}
-function saveMembers(m){localStorage.setItem('bk_members',JSON.stringify(m))}
-function joinClub(){const p=document.getElementById('phone').value.trim();const msg=document.getElementById('clubMsg');if(!/^09\d{9}$/.test(p)){msg.textContent='لطفاً یک شماره موبایل ۱۱ رقمی معتبر وارد کنید.';return}let m=getMembers();const exists=m.includes(p);if(!exists){m.push(p);saveMembers(m)}document.getElementById('memberPhone').textContent=p;show('member')}
-function adminLogin(){if(document.getElementById('adminPass').value===ADMIN_PASSWORD){document.getElementById('adminPass').value='';show('admin')}else document.getElementById('adminMsg').textContent='رمز مدیریت اشتباه است.'}
-function adminLogout(){show('home')}
-function refreshAdmin(){const all=getMembers();const q=(document.getElementById('memberSearch')?.value||'').trim();const m=q?all.filter(x=>x.includes(q)):all;document.getElementById('memberCount').textContent=all.length;document.getElementById('membersList').innerHTML=m.length?m.map((x,i)=>`<div class="box member-row"><div><b>عضو ${all.indexOf(x)+1}</b><div class="small">${x}</div></div><button class="delete" onclick="deleteMember('${x}')">حذف</button></div>`).join(''):'<div class="note">عضوی پیدا نشد.</div>'}
-function deleteMember(phone){if(confirm('این عضو حذف شود؟')){saveMembers(getMembers().filter(x=>x!==phone));refreshAdmin()}}
-function clearMembers(){if(confirm('همه اعضای آزمایشی حذف شوند؟')){localStorage.removeItem('bk_members');refreshAdmin()}}
-show('home');
-</script>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-black">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 glass border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center font-black text-black text-2xl shadow-lg shadow-gold-500/20">
+                    BK
+                </div>
+                <div>
+                    <span class="text-xl font-bold gold-text block">هلدینگ B.K</span>
+                    <span class="text-xs text-slate-400 block">فروش قانونی تجهیزات ماینینگ با برگه سبز</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8 space-x-reverse font-medium text-sm text-slate-300">
+                <a href="#about" class="hover:text-gold-400 transition">درباره ما</a>
+                <a href="#calculator" class="hover:text-gold-400 transition">ماشین‌حساب سودآوری</a>
+                <a href="#ai-assistant" class="hover:text-gold-400 transition">هوش مصنوعی عیب‌یاب</a>
+                <a href="#consultation" class="hover:text-gold-400 transition">درخواست مشاوره</a>
+                <a href="#club" class="hover:text-gold-400 transition">باشگاه مشتریان</a>
+            </nav>
+
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <a href="tel:09926732212" class="gold-gradient text-black font-bold px-5 py-2.5 rounded-xl shadow-md hover:opacity-90 transition flex items-center space-x-2 space-x-reverse">
+                    <i class="fa-solid font-bold fa-phone"></i>
+                    <span>09926732212</span>
+                </a>
+                <button onclick="toggleAdminModal()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg transition">
+                    <i class="fa-solid fa-lock"></i> پنل مدیر
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div class="inline-flex items-center space-x-2 space-x-reverse bg-slate-900/80 border border-gold-500/30 px-4 py-2 rounded-full mb-6">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-semibold text-gold-400">واردات و عرضه قانونی دستگاه‌های ASIC با شناسه رهگیری</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-6 leading-tight">
+            تأمین قانونی ماینر و تجهیزات استخراج در <span class="gold-text">هلدینگ B.K</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+            مشاوره تخصصی، فروش قانونی تجهیزات پردازشی، ارائه برگه سبز گمرکی و ضمانت اصالت قطعات. خریدی امن و مطمئن با پشتیبانی هوشمند.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#consultation" class="gold-gradient text-black font-bold px-8 py-4 rounded-xl text-lg shadow-lg hover:shadow-gold-500/20 transition">
+                <i class="fa-solid fa-headset me-2"></i>درخواست مشاوره رایگان
+            </a>
+            <a href="#calculator" class="bg-slate-800 border border-slate-700 hover:bg-slate-700 text-white font-semibold px-8 py-4 rounded-xl text-lg transition">
+                <i class="fa-solid fa-calculator me-2"></i>محاسبه آنلاین درآمد
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-2xl border-t-4 border-gold-500">
+                    <i class="fa-solid fa-file-contract text-4xl text-gold-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">فروش تماماً قانونی</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">تأمین تجهیزات به همراه برگه سبز گمرکی، ثبت در سامانه جامع تجارت و شناسه رهگیری معتبر.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl border-t-4 border-gold-500">
+                    <i class="fa-solid fa-microchip text-4xl text-gold-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">تجهیزات آکبند و اورجینال</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">عرضه مستقیم جدیدترین مدل‌های Whatsminer و Antminer با تضمین سلامت هش‌برد و منبع تغذیه.</p>
+                </div>
+                <div class="glass p-8 rounded-2xl border-t-4 border-gold-500">
+                    <i class="fa-solid fa-shield-halved text-4xl text-gold-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">پشتیبانی و اصالت کالا</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">خدمات پس از فروش، تحویل آنی و مشاوره تخصصی زیر نظر کارشناسان ارشد هلدینگ B.K.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-white mb-4">ماشین‌حساب آنلاین و زنده درآمد ماینینگ</h2>
+            <p class="text-slate-400">محاسبه دقیق درآمد روزانه و ماهانه بر اساس قیمت لحظه‌ای بیت‌کوین</p>
+        </div>
+        <div class="glass p-8 rounded-3xl grid lg:grid-cols-2 gap-10 items-center">
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">نرخ تراهش (TH/s):</label>
+                    <input type="number" id="hashrate" value="120" oninput="calculateProfit()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">توان مصرفی (وات):</label>
+                    <input type="number" id="power" value="3300" oninput="calculateProfit()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">قیمت بیت‌کوین (دلار):</label>
+                    <input type="number" id="btcPrice" value="65000" oninput="calculateProfit()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+                </div>
+            </div>
+            <div class="bg-slate-900/90 p-8 rounded-2xl border border-slate-800 space-y-6 text-center">
+                <div class="border-b border-slate-800 pb-4">
+                    <span class="text-xs text-slate-400 block mb-1">تخمین درآمد روزانه</span>
+                    <span id="dailyUSD" class="text-3xl font-black text-emerald-400">$0.00</span>
+                    <span id="dailyIRT" class="text-sm text-slate-400 block mt-1">0 تومان</span>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-400 block mb-1">تخمین درآمد ماهانه</span>
+                    <span id="monthlyUSD" class="text-4xl font-black text-gold-400">$0.00</span>
+                    <span id="monthlyIRT" class="text-sm text-slate-400 block mt-1">0 تومان</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Diagnostic Section -->
+    <section id="ai-assistant" class="py-20 bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="bg-gold-500/10 text-gold-400 text-xs px-3 py-1 rounded-full font-bold">هوش مصنوعی اختصاصی B.K</span>
+                <h2 class="text-3xl font-extrabold text-white mt-3">دستيار هوشمند عیب‌یاب تجهیزات ASIC</h2>
+                <p class="text-slate-400 text-sm mt-2">کد ارور یا مشکل دستگاه (Whatsminer / Antminer) را بنویسید تا راهکار راه اندازی ارائه شود.</p>
+            </div>
+            <div class="glass p-6 rounded-2xl">
+                <div id="chatHistory" class="h-64 overflow-y-auto space-y-4 mb-4 p-4 bg-slate-950/60 rounded-xl border border-slate-800 text-sm">
+                    <div class="bg-slate-800 p-3 rounded-lg text-slate-300 max-w-md">
+                        سلام! من هوش مصنوعی عیب‌یاب هلدینگ B.K هستم. کد ارور یا مشکل دستگاه خودتون را برام بنویسید (مثلاً Error 206 یا Red Light).
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="aiQuery" placeholder="مثلاً: ارور High Temperature در واتس ماینر..." class="flex-grow bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-sm">
+                    <button onclick="askAI()" class="gold-gradient text-black font-bold px-6 py-3 rounded-xl transition">ارسال</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Form -->
+    <section id="consultation" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass p-8 sm:p-12 rounded-3xl border border-gold-500/20">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-extrabold text-white">ثبت درخواست مشاوره و خرید قانونی</h2>
+                <p class="text-slate-400 text-sm mt-2">شماره تماس خود را بگذارید، کارشناسان ما با شما تماس خواهند گرفت.</p>
+            </div>
+            <form onsubmit="submitLead(event)" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">نام و نام خانوادگی:</label>
+                    <input type="text" id="leadName" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">شماره تماس:</label>
+                    <input type="tel" id="leadPhone" placeholder="09926732212" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">شرح درخواست یا مدل مدنظر:</label>
+                    <textarea id="leadNote" rows="4" placeholder="مثلاً: استعلام قیمت M30S++ با برگه سبز..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:border-gold-500 focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full gold-gradient text-black font-extrabold py-4 rounded-xl text-lg hover:opacity-90 transition">
+                    ثبت درخواست مشاوره
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- QR Code & Share -->
+    <section id="club" class="py-16 bg-slate-900/60 border-t border-slate-800 text-center">
+        <div class="max-w-md mx-auto px-4">
+            <h3 class="text-xl font-bold text-white mb-2">اشتراک‌گذاری و دسترسی سریع</h3>
+            <p class="text-slate-400 text-xs mb-6">اسکن بارکد جهت دریافت آدرس وب‌سایت هلدینگ B.K</p>
+            <div class="p-4 bg-white rounded-2xl inline-block shadow-xl mb-4">
+                <div id="qrcode"></div>
+            </div>
+            <p class="text-xs text-gold-400 font-mono">https://holding-bk.ir</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-8 border-t border-slate-900 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <p>© کلیه حقوق مادی و معنوی متعلق به **هلدینگ B.K** می‌باشد.</p>
+            <p>شماره تماس مستقیم کارشناسان: <a href="tel:09926732212" class="text-gold-400 font-bold">09926732212</a></p>
+        </div>
+    </footer>
+
+    <!-- Admin Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4">
+        <div class="glass p-8 rounded-2xl max-w-lg w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold text-white">پنل مدیریت هلدینگ B.K</h3>
+                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-white">&times;</button>
+            </div>
+            <div id="adminAuth" class="space-y-4">
+                <input type="password" id="adminPass" placeholder="رمز عبور پیش‌فرض: bk123" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white">
+                <button onclick="checkAdmin()" class="w-full gold-gradient text-black font-bold py-3 rounded-xl">ورود</button>
+            </div>
+            <div id="adminPanel" class="hidden space-y-4">
+                <h4 class="text-sm font-bold text-gold-400">لیست درخواست‌های دریافت شده:</h4>
+                <div id="leadList" class="max-h-60 overflow-y-auto space-y-2 text-xs text-slate-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Profit Calculation
+        function calculateProfit() {
+            const th = parseFloat(document.getElementById('hashrate').value) || 0;
+            const watt = parseFloat(document.getElementById('power').value) || 0;
+            const btcUSD = parseFloat(document.getElementById('btcPrice').value) || 65000;
+            const dollarIRT = 60000; // نرخ تقریبی تومان
+
+            // فرمول تقریبی محاسبه بیت کوین به ازای هر تراهش در روز
+            const btcPerTHDay = 0.00000058;
+            const dailyBTC = th * btcPerTHDay;
+            const dailyUsdEarned = dailyBTC * btcUSD;
+            const monthlyUsdEarned = dailyUsdEarned * 30;
+
+            document.getElementById('dailyUSD').innerText = '$' + dailyUsdEarned.toFixed(2);
+            document.getElementById('dailyIRT').innerText = Math.round(dailyUsdEarned * dollarIRT).toLocaleString('fa-IR') + ' تومان';
+            
+            document.getElementById('monthlyUSD').innerText = '$' + monthlyUsdEarned.toFixed(2);
+            document.getElementById('monthlyIRT').innerText = Math.round(monthlyUsdEarned * dollarIRT).toLocaleString('fa-IR') + ' تومان';
+        }
+
+        // AI Diagnostic Assistant
+        function askAI() {
+            const input = document.getElementById('aiQuery');
+            const history = document.getElementById('chatHistory');
+            const q = input.value.trim();
+            if (!q) return;
+
+            history.innerHTML += `<div class="bg-gold-500/20 text-gold-300 p-3 rounded-lg text-left max-w-md mr-auto">${q}</div>`;
+            input.value = '';
+
+            let response = "مشکل بررسی شد. پیشنهاد می‌شود اتصالات فن، هش‌برد و ولتاژ پاور را بررسی کرده و در صورت نیاز با کارشناسان هلدینگ B.K با شماره 09926732212 تماس بگیرید.";
+            if (q.toLowerCase().includes("206") || q.includes("دما")) {
+                response = "ارور مربوط به دمای بالای هش‌برد می‌باشد. خنک‌کننده، فن‌ها و تهویه محیط را بررسی کنید.";
+            } else if (q.toLowerCase().includes("fan")) {
+                response = "خطای فن شناسایی شد. سیم فن یا دور موتور آن را تست نمایید.";
+            }
+
+            setTimeout(() => {
+                history.innerHTML += `<div class="bg-slate-800 p-3 rounded-lg text-slate-300 max-w-md">${response}</div>`;
+                history.scrollTop = history.scrollHeight;
+            }, 600);
+        }
+
+        // Lead Submission
+        function submitLead(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName').value;
+            const phone = document.getElementById('leadPhone').value;
+            const note = document.getElementById('leadNote').value;
+
+            const leads = JSON.parse(localStorage.getItem('bk_leads') || '[]');
+            leads.push({ name, phone, note, date: new Date().toLocaleDateString('fa-IR') });
+            localStorage.setItem('bk_leads', JSON.stringify(leads));
+
+            alert('درخواست شما با موفقیت ثبت شد. کارشناسان هلدینگ B.K به زودی با شما تماس خواهند گرفت.');
+            e.target.reset();
+        }
+
+        // Admin Auth
+        function toggleAdminModal() {
+            document.getElementById('adminModal').classList.toggle('hidden');
+        }
+        function checkAdmin() {
+            if (document.getElementById('adminPass').value === 'bk123') {
+                document.getElementById('adminAuth').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                loadLeads();
+            } else {
+                alert('رمز عبور اشتباه است!');
+            }
+        }
+        function loadLeads() {
+            const leads = JSON.parse(localStorage.getItem('bk_leads') || '[]');
+            const list = document.getElementById('leadList');
+            if(leads.length === 0) {
+                list.innerHTML = '<p class="text-slate-500">هیچ درخواستی ثبت نشده است.</p>';
+                return;
+            }
+            list.innerHTML = leads.map(l => `<div class="p-2 bg-slate-900 rounded border border-slate-800"><b>${l.name}</b> (${l.phone}): ${l.note}</div>`).join('');
+        }
+
+        // Generate QR Code on Load
+        window.onload = function() {
+            calculateProfit();
+            new QRCode(document.getElementById("qrcode"), {
+                text: "https://holding-bk.ir",
+                width: 128,
+                height: 128,
+                colorDark : "#000000",
+                colorLight : "#ffffff"
+            });
+        }
+    </script>
 </body>
 </html>
